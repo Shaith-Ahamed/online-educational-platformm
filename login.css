@@ -7,11 +7,11 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    height: 100vh; /* Full viewport height */
-    background-image: url('back.jpg'); /* Specify your background image */
-    background-size: cover; /* Make the image cover the entire container */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
+    height: 100vh; 
+    background-image: url('back.jpg'); 
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
 }
 
 .container {
@@ -33,7 +33,8 @@ body {
 .toggle-btn{
     font-size: 15px;
     border: none;
-    background-color: rgb(156, 198, 214);
+    background-color: black;
+    color: white;
 
     border-radius: 5px;
    
@@ -111,7 +112,7 @@ form input {
 form button {
     width: 100%;
     padding: 12px;
-    background: rgb(99, 97, 97);
+    background: #2196F3;
     color: white;
     border: none;
     border-radius: 5px;
@@ -121,7 +122,8 @@ form button {
 }
 
 form button:hover {
-    opacity: 0.9;
+    /* opacity: 0.9; */
+    background: #1976D2;
 }
 
 .toggle-btn:hover{

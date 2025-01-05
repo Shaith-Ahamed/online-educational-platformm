@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+   
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <header>
+        
+            <img src="logo.webp" alt="Website Logo"class="logo">
+            <div class="header-titles">
+                <h1>Online Education Platform</h1>
+                
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="login.html">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="welcome">
+            <h2>Hello, [Student Name]</h2>
+            <p>Welcome to your dashboard. Here, you can access your courses, study materials, and activity logs.</p>
+        </section>
+        <section class="enrolled_courses">
+            <h3>Your Enrolled Courses</h3>
+            <div class="courses-row" id="enrolled-courses">
+                <p>No courses enrolled yet.</p>
+            </div>
+        </section>
+
+        <section class="new_courses">
+            <h3>New Courses</h3>
+            <div class="courses-row">
+                <div class="course-card1" data-course="Introduction to Web Development">
+                    <p>Introduction to Web Development</p>
+                </div>
+                <div class="course-card2" data-course="Generative AI">
+                    <p>Generative AI</p>
+                </div>
+                <div class="course-card3" data-course="Cloud Computing">
+                    <p>Cloud Computing</p>
+                </div>
+                <div class="course-card4" data-course="Cyber Security">
+                    <p>Cyber Security</p>
+                </div>
+                <div class="course-card5" data-course="Data Analysis">
+                    <p>Data Analysis</p>
+                </div>
+                <div class="course-card6" data-course="Quantum Computing">
+                    <p>Quantum Computing</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="resources">
+            <h3>Resources</h3>
+            <p>Access additional study materials <a href="#">here</a>.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Online Education Platform. All rights reserved.</p>
+    </footer>
+
+    <!-- Dialog Overlay -->
+    <div class="dialog-overlay" id="dialog-overlay">
+        <div class="dialog-box" id="dialog-box">
+            <p id="dialog-message">Do you want to enroll in this course?</p>
+            <button id="dialog-confirm">Enroll</button>
+            <button id="dialog-cancel">Cancel</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
