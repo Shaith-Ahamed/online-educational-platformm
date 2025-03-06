@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Education Platform</title>
+    <style>
+
+        html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-image: url('back.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: rgb(80, 122, 158);
+    color: white;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 80px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+    color: darkblue;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;  
+    }
+
+    .header-left {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        padding-top: 10px;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 10px;
+    }
+}
+
+
+.headtext{
+    color: white;
+}
+
+
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* opacity: 0.9; */
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .cta {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .cta:hover {
+            background-color: #0056b3;
+        }
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-top: 40px;
+        }
+        form {
+            margin-top: 20px;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+  
+
+        .footertext {  
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    margin-top: auto;
+    font-size: 14px;
+    
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    margin-top: auto;
+    font-size: 14px;
+    
+}
+
+
+
+
+    
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .cta {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+            input, textarea {
+                font-size: 14px;
+            }
+            button {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        
+        <img src="logo.webp" alt="Website Logo"class="logo">
+        <div class="header-titles">
+            <h1 class="headtext">Learn2Earn</h1>
+            
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Home</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="login.html">Log Out</a></li>
+            <li><a href="Aboutus.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <div class="container">
+        <h1>Empower Your Learning Journey with <span style="color: #007bff;">Learn2Earn</span></h1>
+        <p>In today's fast-paced world, education should be <b>accessible, flexible, and future-focused</b>. 
+            That’s exactly what <b>Learn2Earn</b> offers—an <b>innovative online learning experience</b> 
+            designed to help you <b>develop industry-ready skills</b> and <b>achieve your career goals</b>.</p>
+
+        <p>Our platform provides a <b>wide range of courses</b> in <b>technology, business, design, and more</b>, 
+            taught by <b>expert instructors</b> from around the world. Whether you’re a <b>student looking to upskill</b>, 
+            a <b>professional seeking career growth</b>, or a <b>lifelong learner</b>, we have something for you.</p>
+
+        <p>With <b>interactive video lessons, real-world projects, and personalized mentorship</b>, 
+            <b>Learn2Earn</b> ensures that learning is <b>engaging, practical, and impactful</b>. 
+            Our <b>self-paced courses and live sessions</b> allow you to learn <b>anytime, anywhere</b>, 
+            making education more <b>convenient</b> than ever.</p>
+
+        <a href="#" class="cta">Start Learning Today</a>
+
+        <!-- Feedback Form -->
+        <div>
+            <h2>Your Feedback</h2>
+            <p>We'd love to hear your thoughts! Please provide us with your feedback below.</p>
+            <form action="#" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="feedback" placeholder="Your Feedback" rows="5" required></textarea>
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </div>
+
+        <!-- Help Form -->
+        <div>
+            <h2>Need Help?</h2>
+            <p>If you have any questions or need assistance, feel free to reach out to us!</p>
+            <form action="#" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="query" placeholder="Describe Your Issue or Question" rows="5" required></textarea>
+                <button type="submit">Get Help</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <footer>
+        <p class="footertext">&copy; 2025 Online Education Platform. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

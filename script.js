@@ -125,3 +125,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
+
+// Welcome image and text transformation
+const data = [
+    { 
+        image: "iamge4.webp", 
+        heading: "Empower Your Future", 
+        content: "Gain industry-ready skills and take the next step in your career. Start learning today." 
+    },
+    { 
+        image: "iamge5.jpg", 
+        heading: "Shape the Future with Technology", 
+        content: "Stay ahead in the digital era. Learn cutting-edge skills and innovate with confidence." 
+    }
+];
+
+let index = 0;
+const welcomeDiv = document.querySelector(".welcome");
+const headingElement = document.getElementById("dynamic-heading");
+const contentElement = document.getElementById("dynamic-content");
+
+function changeContent() {
+    // Start fade-out
+    welcomeDiv.style.opacity = 0;
+    headingElement.style.opacity = 0;
+    contentElement.style.opacity = 0;
+
+    // Wait for fade-out animation to complete (1s)
+    setTimeout(() => {
+        // Change background image
+        welcomeDiv.style.backgroundImage = `url(${data[index].image})`;
+
+        // Change text content
+        headingElement.innerText = data[index].heading;
+        contentElement.innerText = data[index].content;
+
+        // Start fade-in
+        welcomeDiv.style.opacity = 1;
+        headingElement.style.opacity = 1;
+        contentElement.style.opacity = 1;
+
+        // Move to the next content in the list
+        index = (index + 1) % data.length;
+    }, 1000); // Matches the transition duration in CSS
+}
+
+// Change content every 5 seconds
+setInterval(changeContent, 8000);

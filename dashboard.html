@@ -12,7 +12,7 @@
         
             <img src="logo.webp" alt="Website Logo"class="logo">
             <div class="header-titles">
-                <h1>Online Education Platform</h1>
+                <h1>Learn2Earn</h1>
                 
             </div>
         </div>
@@ -21,24 +21,28 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="login.html">Log Out</a></li>
+                <li><a href="Aboutus.html">About Us</a></li>
             </ul>
         </nav>
     </header>
     
     <main>
-        <section class="welcome">
-            <h2>Hello, [Student Name]</h2>
-            <p>Welcome to your dashboard. Here, you can access your courses, study materials, and activity logs.</p>
-        </section>
+        <div class="welcome">
+            <div class="text-box">
+                <h2 id="dynamic-heading">Learning that gets you</h2>
+                <p id="dynamic-content">Skills for your present (and your future). Get started with us.</p>
+            </div>
+        </div>
+        
         <section class="enrolled_courses">
-            <h3>Your Enrolled Courses</h3>
+            <h2>Your Enrolled Courses</h2>
             <div class="courses-row" id="enrolled-courses">
                 <p>No courses enrolled yet.</p>
             </div>
         </section>
 
         <section class="new_courses">
-            <h3>New Courses</h3>
+            <h2>New Courses</h2>
             <div class="courses-row">
                 <div class="course-card1" data-course="Introduction to Web Development">
                     <p>Introduction to Web Development</p>
@@ -61,10 +65,7 @@
             </div>
         </section>
 
-        <section class="resources">
-            <h3>Resources</h3>
-            <p>Access additional study materials <a href="#">here</a>.</p>
-        </section>
+        
     </main>
     <footer>
         <p>&copy; 2025 Online Education Platform. All rights reserved.</p>
