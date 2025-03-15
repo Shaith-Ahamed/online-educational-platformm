@@ -41,7 +41,7 @@ body {
 
 }
 
-/* Left Panel */
+
 .left-panel {
     flex: 1;
     background: rgb(80, 122, 158);
@@ -58,7 +58,7 @@ body {
     transform: translateX(100%);
 }
 
-/* Right Panel */
+
 .right-panel {
     flex: 1;
     background-color:  rgb(216, 222, 224);
@@ -75,7 +75,7 @@ body {
     transform: translateX(-100%);
 }
 
-/* Form Panels */
+
 .form-panel {
     display: none;
 }
