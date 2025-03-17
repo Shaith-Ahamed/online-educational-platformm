@@ -1,35 +1,6 @@
-const { JSDOM } = require('jsdom');
-
-// Mock the DOM
-const dom = new JSDOM(`
-    <!DOCTYPE html>
-    <html>
-        <body>
-            <div id="enrolled-courses">
-                <p>No courses enrolled yet.</p>
-            </div>
-            <div class="course-card1" data-course="Course 1">Course 1</div>
-            <div class="course-card2" data-course="Course 2">Course 2</div>
-            <div id="dialog-overlay">
-                <div id="dialog-message"></div>
-                <button id="dialog-confirm">Confirm</button>
-                <button id="dialog-cancel">Cancel</button>
-            </div>
-            <div class="welcome">
-                <h1 id="dynamic-heading">Welcome</h1>
-                <p id="dynamic-content">Start learning today.</p>
-            </div>
-        </body>
-    </html>
-`);
-
-const { document } = dom.window;
-
-// Your existing code
-document.addEventListener('DOMContentLoaded', () => {
-    // COURSE ENROLLMENT FUNCTIONALITY
+document.addEventListener('DOMContentLoaded', async () => {
     const enrolledCourses = document.getElementById('enrolled-courses');
-    const courseCards = document.querySelectorAll('.course-card1, .course-card2');
+    const courseCards = document.querySelectorAll('.course-card1, .course-card2, .course-card3, .course-card4, .course-card5, .course-card6');
 
     const dialogOverlay = document.getElementById('dialog-overlay');
     const dialogMessage = document.getElementById('dialog-message');
@@ -38,6 +9,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let selectedCourse = '';
 
+    // Function to Load Previously Enrolled Courses
+    async function loadEnrolledCourses() {
+        try {
+            const response = await fetch('/get-enrolled-courses');
+            const data = await response.json();
+
+            if (response.ok) {
+                enrolledCourses.innerHTML = ''; // Clear existing list
+
+                data.enrolledCourses.forEach(courseName => {
+                    addEnrolledCourseToUI(courseName); //Add course to UI
+                });
+            } else {
+                console.log(`Error loading courses: ${data.message}`);
+            }
+        } catch (error) {
+            console.error('Error fetching enrolled courses:', error);
+        }
+    }
+
+    // ✅ 2️⃣ Function to Add Enrolled Course to UI
+    function addEnrolledCourseToUI(courseName) {
+        const courseCard = document.createElement('div');
+        courseCard.className = 'enrolled-course-card';
+        courseCard.setAttribute('data-course', courseName);
+        courseCard.innerHTML = `
+            <h4>${courseName}</h4>
+            <p>Course content and resources will appear here soon.</p>
+            <button class="unenroll-btn">Unenroll</button>
+        `;
+
+        enrolledCourses.appendChild(courseCard);
+
+        // ✅ Handle Unenrollment
+        courseCard.querySelector('.unenroll-btn').addEventListener('click', async () => {
+            try {
+                const unenrollResponse = await fetch('/unenroll', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ courseName }),
+                });
+
+                if (unenrollResponse.ok) {
+                    courseCard.remove();
+                    if (enrolledCourses.children.length === 0) {
+                        enrolledCourses.innerHTML = '<p>No courses enrolled yet.</p>';
+                    }
+                }
+            } catch (error) {
+                console.error('Error during unenrollment:', error);
+            }
+        });
+    }
+
+    // ✅ 3️⃣ Load Previously Enrolled Courses on Page Load
+    await loadEnrolledCourses();
+
+    // ✅ 4️⃣ Handle New Course Enrollment
     courseCards.forEach(card => {
         card.addEventListener('click', () => {
             selectedCourse = card.getAttribute('data-course');
@@ -48,69 +77,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (confirmButton) {
         confirmButton.addEventListener('click', async () => {
-            const existingCourse = Array.from(enrolledCourses.children).find(
-                (child) => child.getAttribute('data-course') === selectedCourse
-            );
+            try {
+                const response = await fetch('/enroll', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ courseName: selectedCourse }),
+                });
 
-            if (!existingCourse) {
-                try {
-                    const response = await fetch('/enroll', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ course: selectedCourse }),
-                    });
+                const data = await response.json();
+                if (response.ok) {
+                    console.log(`✅ Successfully enrolled in "${selectedCourse}".`);
 
-                    const data = await response.json();
-                    if (response.ok) {
-                        if (enrolledCourses.children[0]?.tagName === 'P') {
-                            enrolledCourses.innerHTML = '';
-                        }
-
-                        const courseCard = document.createElement('div');
-                        courseCard.className = 'enrolled-course-card';
-                        courseCard.setAttribute('data-course', selectedCourse);
-                        courseCard.innerHTML = `
-                            <h4>${selectedCourse}</h4>
-                            <p>Course content and resources will appear here soon.</p>
-                            <button class="unenroll-btn">Unenroll</button>
-                        `;
-
-                        enrolledCourses.appendChild(courseCard);
-
-                        const unenrollButton = courseCard.querySelector('.unenroll-btn');
-                        unenrollButton.addEventListener('click', async () => {
-                            try {
-                                const response = await fetch('/unenroll', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                    body: JSON.stringify({ course: selectedCourse }),
-                                });
-
-                                if (response.ok) {
-                                    courseCard.remove();
-                                    if (enrolledCourses.children.length === 0) {
-                                        enrolledCourses.innerHTML = '<p>No courses enrolled yet.</p>';
-                                    }
-                                }
-                            } catch (error) {
-                                console.error('Error during unenrollment:', error);
-                            }
-                        });
-
-                        console.log(`You have successfully enrolled in "${selectedCourse}".`);
-                    } else {
-                        console.log(data.message || 'Enrollment failed. Please try again.');
-                    }
-                } catch (error) {
-                    console.error('Error during enrollment:', error);
-                    console.log('An error occurred. Please try again.');
+                    // ✅ Add newly enrolled course to UI
+                    addEnrolledCourseToUI(selectedCourse);
+                } else {
+                    console.log(`❌ Enrollment failed: ${data.message}`);
                 }
-            } else {
-                console.log(`You are already enrolled in "${selectedCourse}".`);
+            } catch (error) {
+                console.error('❌ Error during enrollment:', error);
             }
 
             dialogOverlay.classList.remove('show');
@@ -131,17 +115,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    
+
     // DYNAMIC WELCOME SECTION
     const data = [
         { 
-            image: "iamge4.webp", 
-            heading: "Empower Your Future", 
-            content: "Gain industry-ready skills and take the next step in your career. Start learning today." 
-        },
-        { 
+
             image: "iamge5.jpg", 
             heading: "Shape the Future with Technology", 
             content: "Stay ahead in the digital era. Learn cutting-edge skills and innovate with confidence." 
+             
+        },
+        { 
+            image: "iamge4.webp", 
+            heading: "Empower Your Future", 
+            content: "Gain industry-ready skills and take the next step in your career. Start learning today."
+
+
+            
         }
     ];
 
@@ -170,6 +162,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(changeContent, 8000);
 });
-
-// Trigger DOMContentLoaded event
-dom.window.document.dispatchEvent(new dom.window.Event('DOMContentLoaded'));

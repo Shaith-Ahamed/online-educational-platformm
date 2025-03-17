@@ -3,30 +3,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const signInButton = document.querySelector('.form-panel.sign-in button.sign-in');
     if (signInButton) {
         signInButton.addEventListener('click', async (event) => {
+
             const username = document.getElementById('username')?.value;
             const password = document.getElementById('password')?.value;
 
+
+
             try {
-                const response = await fetch('/login', {
+                const response = await fetch('/dashboard', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({ username, password }),
                 });
-
+    
                 const data = await response.json();
+                console.log("Server Response:", data); 
                 if (response.ok) {
-                    window.location.href = './dashboard.html'; // Redirect to dashboard
+                    localStorage.setItem('UserId', data.userId); 
+                    console.log("Retrieved userId:", data.userId);
+                    window.location.href = './dashboard.html'; 
                 } else {
-                    alert(data.message || 'Invalid username or password.');
+                    alert(data.message || 'Invalid username or password.'); 
                 }
-            } catch (error) {
-                console.error('Error during login:', error);
-                alert('An error occurred. Please try again.');
             }
+             catch (error) {
+                console.error('❌ Error during login:', error);
+             
+            }
+
+       
         });
+
+
+
+
     }
+
 
     // TOGGLE BETWEEN SIGN-IN AND SIGN-UP FORMS
     const toggleBtn = document.querySelector('.toggle-btn');
@@ -53,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
 
     // SIGN-UP FORM SUBMISSION
     const signUpFormButton = document.querySelector('.form-panel.sign-up button.sign-up');
